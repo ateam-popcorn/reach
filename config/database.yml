@@ -77,11 +77,11 @@ test:
 #
 # You can use this database configuration with:
 #
-#   production:
-#     url: <%= ENV['DATABASE_URL'] %>
-#
 production:
-  <<: *default
-  database: pop_conference_production
-  username: pop_conference
-  password: <%= ENV['POP_CONFERENCE_DATABASE_PASSWORD'] %>
+  url: <%= ENV['DATABASE_URL'] %>
+
+# production:
+#   <<: *default
+#   database: pop_conference_production
+#   username: pop_conference
+#   password: <%= ENV['POP_CONFERENCE_DATABASE_PASSWORD'] %>
