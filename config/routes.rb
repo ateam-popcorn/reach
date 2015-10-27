@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'meeting/index'
+
   devise_for :users
   get 'home/index'
 
