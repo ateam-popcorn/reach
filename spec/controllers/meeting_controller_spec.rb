@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe MeetingController, type: :controller do
 
-  describe "GET #view" do
+  describe "GET #show" do
     it "returns http success" do
-      get :view
+      get :show
       expect(response).to have_http_status(:success)
     end
   end

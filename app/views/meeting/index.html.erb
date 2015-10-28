@@ -3,7 +3,7 @@
   <% @m_titles.each do |m| %>
     <li>
       <td>
-        <%= m[:title] %>
+        <%= link_to m[:title], meeting_show_path(m[:id]) %>
       </td>
       <td>
         <%= m[:start_at] %>
@@ -14,4 +14,3 @@
     </li>
   <% end %>
 </ul>
-

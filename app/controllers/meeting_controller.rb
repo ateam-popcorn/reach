@@ -4,6 +4,7 @@ class MeetingController < ApplicationController
     researches = Research.all
     @m_titles = []
 
+
     meetings.each{ |m|
       researches.each { |r|
         if r.id == m.research.id then
@@ -13,6 +14,8 @@ class MeetingController < ApplicationController
     }
   end
 
-  def view
+  def show
+    @meeting = Meeting.find(params[:id])
+    @research = Research.find(@meeting.research_id)
   end
 end
