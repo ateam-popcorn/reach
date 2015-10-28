@@ -2,8 +2,15 @@
 <ul>
   <% @m_titles.each do |m| %>
     <li>
-      <%= m %>
+      <td>
+        <%= link_to m[:title], meeting_show_path(m[:id]) %>
+      </td>
+      <td>
+        <%= m[:start_at] %>
+      </td>
+      <td>
+        <%= m[:end_at] %>
+      </td>
     </li>
   <% end %>
 </ul>
-

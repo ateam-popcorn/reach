@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
+
   get 'meeting/index'
+  get 'meeting/:id', to: 'meeting#show', as: 'meeting_show'
 
   devise_for :users
   get 'home/index'
-
   get 'home/show'
 
   root 'home#index'
