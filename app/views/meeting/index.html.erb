@@ -2,7 +2,15 @@
 <ul>
   <% @m_titles.each do |m| %>
     <li>
-      <%= m %>
+      <td>
+        <%= m[:title] %>
+      </td>
+      <td>
+        <%= m[:start_at] %>
+      </td>
+      <td>
+        <%= m[:end_at] %>
+      </td>
     </li>
   <% end %>
 </ul>

@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'meeting/view'
+
+  get 'meeting/view'
+
   get 'meeting/index'
 
   devise_for :users

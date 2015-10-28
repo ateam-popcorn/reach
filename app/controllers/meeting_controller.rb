@@ -7,9 +7,12 @@ class MeetingController < ApplicationController
     meetings.each{ |m|
       researches.each { |r|
         if r.id == m.research.id then
-          @m_titles.push(r.title)
+          @m_titles.push(id: m.id, title: r.title, start_at: m.start_at, end_at: m.end_at)
         end
       }
     }
+  end
+
+  def view
   end
 end
