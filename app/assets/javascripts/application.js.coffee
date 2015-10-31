@@ -17,3 +17,7 @@
 #= require vue.min.js
 #= require peer.min.js
 #= require_tree .
+#= require_self
+
+new Vue
+  el: 'body'
