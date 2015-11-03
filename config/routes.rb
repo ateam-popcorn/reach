@@ -2,7 +2,12 @@ Rails.application.routes.draw do
   resources :researches do
     resources :meetings, only: [:new, :create], shallow: true do
       resources :participants, only: [:create, :destroy]
-      resource :room
+      resource :room, only: [:show] do
+        member do
+          post :member, action: 'join'
+          delete :member, action: 'leave'
+        end
+      end
     end
   end
 
