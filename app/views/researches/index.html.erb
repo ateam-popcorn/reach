@@ -1,0 +1,32 @@
+<% @researches.each do |research| %>
+  <div class="panel panel-default">
+    <div class="panel-heading"><%= research.title %></div>
+    <div class="panel-body">
+      <p>TODO: 調査内容</p>
+    </div>
+
+    <table class="table">
+      <thead>
+        <th>#</th>
+        <th>開始日時</th>
+        <th>終了日時</th>
+        <th>参加者</th>
+        <th></th>
+      </thead>
+
+      <tbody>
+        <% research.meetings.each_with_index do |meeting, i| %>
+          <tr>
+            <td><%= i + 1 %></td>
+            <td><%= meeting.start_at %></td>
+            <td><%= meeting.end_at %></td>
+            <td><%= meeting.users.count %> / <%= research.max_users %></td>
+            <td>
+              <%= link_to '参加', '#', class: 'btn btn-primary' %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+<% end %>
