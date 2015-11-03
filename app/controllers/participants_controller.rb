@@ -1,5 +1,6 @@
 class ParticipantsController < ApplicationController
-  before_action :set_meeting
+  before_action :authenticate_user!
+  before_action :set_meeting, only: [:create]
 
   def create
     @participant = Participant.new
@@ -7,10 +8,20 @@ class ParticipantsController < ApplicationController
     @participant.meeting = @meeting
 
     if @participant.save
-      render json: @participant, status: :created
+      redirect_to :back
     else
-      render json: @participant.errors.full_messages,
-             status: :unprocessable_entity
+      flash['alart'] = @participant.errors.full_messages
+      redirect_to :back
+    end
+  end
+
+  def destroy
+    @participant = Participant.find(params[:id])
+    if @participant.destroy
+      redirect_to :back
+    else
+      flash['alart'] = @participant.errors.full_messages
+      redirect_to :back
     end
   end
 

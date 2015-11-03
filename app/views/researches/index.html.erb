@@ -22,7 +22,18 @@
             <td><%= meeting.end_at %></td>
             <td><%= meeting.users.count %> / <%= research.max_users %></td>
             <td>
-              <%= link_to '参加', '#', class: 'btn btn-primary' %>
+              <% participant = meeting.participants.find_by(user: current_user) %>
+              <% if participant %>
+                <%= link_to 'キャンセル',
+                            participant_path(participant),
+                            method: 'delete',
+                            class: 'btn btn-danger' %>
+              <% else %>
+                <%= link_to '予約',
+                            meeting_participants_path(meeting),
+                            method: 'post',
+                            class: 'btn btn-primary' %>
+              <% end %>
             </td>
           </tr>
         <% end %>
