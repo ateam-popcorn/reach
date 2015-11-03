@@ -1,4 +1,4 @@
-class ParticipantController < ApplicationController
+class ParticipantsController < ApplicationController
   before_action :set_meeting
 
   def create
@@ -17,6 +17,6 @@ class ParticipantController < ApplicationController
   private
 
   def set_meeting
-    @meeting = Meeting.find(params[:id])
+    @meeting = Meeting.find(params[:meeting_id])
   end
 end
