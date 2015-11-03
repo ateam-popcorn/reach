@@ -1,7 +1,5 @@
 Rails.application.routes.draw do
-
-  get 'meeting/index'
-  get 'meeting/:id', to: 'meeting#show', as: 'meeting_show'
+  resources :meetings
 
   devise_for :users
   get 'home/index'

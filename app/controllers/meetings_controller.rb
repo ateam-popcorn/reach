@@ -1,4 +1,4 @@
-class MeetingController < ApplicationController
+class MeetingsController < ApplicationController
   def index
     meetings = Meeting.all
     researches = Research.all
