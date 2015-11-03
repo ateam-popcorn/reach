@@ -1,0 +1,7 @@
+<script id="survay-video-chat" type="x-template">
+  <video v-el:local-video></video>
+  <video v-el:remote-video></video>
+
+  <input v-model="peerId" class="form-control" type="text">
+  <a v-on:click.prevent="connectBtnClicked" class="btn btn-primary" href='#'>接続</a>
+</script>
