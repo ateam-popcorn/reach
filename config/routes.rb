@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
-  resources :meetings do
-    resources :participants, only: [:create]
+  resources :researches do
+    resources :meetings, only: [:new, :create], shallow: true do
+      resources :participants, only: [:create]
+    end
   end
 
   devise_for :users
