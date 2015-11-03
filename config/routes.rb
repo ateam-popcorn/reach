@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
-  resources :meetings
+  resources :meetings do
+    resources :participants, only: [:create]
+  end
 
   devise_for :users
   get 'home/index'
