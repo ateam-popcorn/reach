@@ -5,6 +5,6 @@ RSpec.describe Meeting, type: :model do
 
   it { is_expected.to respond_to(:research) }
   it { is_expected.to respond_to(:users) }
-  it { is_expected.to respond_to(:user_meetings) }
+  it { is_expected.to respond_to(:participants) }
   it { is_expected.to respond_to(:notes) }
 end
