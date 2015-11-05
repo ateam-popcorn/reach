@@ -16,6 +16,7 @@
 #= require turbolinks
 #= require vue.min.js
 #= require peer.min.js
+#= require websocket_rails/main
 #= require_tree .
 #= require_self
 
