@@ -7,11 +7,15 @@ class RoomsController < ApplicationController
 
   def join
     if @meeting.users.find_by(id: current_user.id)
-      WebscoketRails["room/#{room.token}"].trigger(
-        :member_joined, peer_id: params[:peer_id])
-      render :nothing, status: :created
+      p "meetings_#{params[:meeting_id]}"
+      WebsocketRails["meetings_#{params[:meeting_id]}"].trigger(
+        :member_joined,
+        peer_id: params[:peer_id], user: current_user
+      )
+
+      head :created
     else
-      render :nothing, status: :forbidden
+      head :forbidden
     end
   end
 
