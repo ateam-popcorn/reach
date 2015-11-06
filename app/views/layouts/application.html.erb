@@ -8,21 +8,27 @@
   <body>
     <div class="container">
       <header>
-        <h1>PopSurvey</h1>
-        <nav>
-          <% if user_signed_in? %>
-            Logged in as <strong><%= current_user.email %></strong>.
-            <%= link_to 'プロフィール変更', edit_user_registration_path %> |
-            <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
-          <% else %>
-            <%= link_to "サインイン", new_user_registration_path %> |
-            <%= link_to "ログイン", new_user_session_path %>
-          <% end %>
+        <nav class="navbar navbar-default">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="/"><%= image_tag("logo.png", :height => "100%") %></a>
+          </div>
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <div class="pull-right">
+              <ul class="nav navbar-nav">
+                <% if user_signed_in? %>
+                  <li><a>Logged in as <strong><%= current_user.email %></strong></a></li>
+                  <li><%= link_to 'プロフィール変更', edit_user_registration_path %></li>
+                  <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+                <% else %>
+                  <li><a>企業の方はこちら</a></li>
+                  <li><%= link_to "サインイン", new_user_registration_path %></li>
+                  <li><%= link_to "ログイン", new_user_session_path %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
         </nav>
       </header>
-
-      <p class="notice"><%= notice %></p>
-      <p class="alert"><%= alert %></p>
 
       <%= yield %>
 
