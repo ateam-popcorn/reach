@@ -1,2 +1,39 @@
-<h1>Researches#new</h1>
-<p>Find me in app/views/researches/new.html.erb</p>
+<h1>新規アンケート作成</h1>
+
+<%= form_for @research do |f| %>
+
+  <div class="field">
+    <%= f.label :title %><br />
+    <%= f.text_field :title %>
+  </div>
+
+  <div class="field">
+    <%= f.label :start_at %><br />
+    <%= f.datetime_select :start_at, use_month_numbers: true, minute_step: 10 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :end_at %><br />
+    <%= f.datetime_select :end_at, use_month_numbers: true, minute_step: 10 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :reward %><br />
+    <%= f.number_field :reward, value: 2000 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :max_users %><br />
+    <%= f.number_field :max_users, value: 4 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :min_users %><br />
+    <%= f.number_field :min_users, value: 2 %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit "新規作成" %>
+  </div>
+
+<% end %>

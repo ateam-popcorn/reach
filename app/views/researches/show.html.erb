@@ -1,0 +1,22 @@
+<h1><%= @research.title %></h1>
+
+<ul>
+  <li><%= @research.start_at %></li>
+  <li><%= @research.end_at %></li>
+  <li><%= @research.reward %></li>
+  <li><%= @research.max_users %></li>
+  <li><%= @research.min_users %></li>
+</ul>
+
+<h2>会議室一覧</h2>
+<ul>
+<% @research.meetings.each do |meeting| %>
+  <li><%= meeting.start_at %>, <%= meeting.end_at %></li>
+<% end %>
+
+<%= form_for [@research, @research.meetings.build] do |f| %>
+  <%= f.datetime_select :start_at, use_month_numbers: true, minute_step: 10 %><br \>
+  <%= f.datetime_select :end_at, use_month_numbers: true, minute_step: 10 %><br \>
+  <%= f.submit %>
+<% end %>
+</ul>

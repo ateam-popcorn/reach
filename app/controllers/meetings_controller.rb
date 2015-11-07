@@ -4,7 +4,8 @@ class MeetingsController < ApplicationController
   end
 
   def create
-    @meeting = Meeting.new(meeting_params)
+    @research = Research.find(params[:research_id])
+    @meeting = @research.meetings.create(meeting_params)
 
     if @meeting.save
       flash[:notice] = 'hogehoge'
@@ -13,7 +14,7 @@ class MeetingsController < ApplicationController
       redirect_to :back
     end
 
-    redirect_to action: :index
+    redirect_to research_path(@research.id)
   end
 
   private

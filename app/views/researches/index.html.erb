@@ -7,7 +7,7 @@
 
 <% @researches.each do |research| %>
   <div class="panel panel-default">
-    <div class="panel-heading"><%= research.title %></div>
+    <div class="panel-heading"><%= link_to research.title, research_path(research.id) %></div>
     <div class="panel-body">
       <p>TODO: 調査内容</p>
     </div>
