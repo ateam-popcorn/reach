@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  get 'researches/new'
+
+  get 'researches/create'
+
   resources :researches do
     resources :meetings, only: [:new, :create], shallow: true do
       resources :participants, only: [:create, :destroy]
