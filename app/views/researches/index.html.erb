@@ -22,32 +22,14 @@
         <div class="panel-body">
           <table class="table">
             <tbody>
-              <tr>
-                <th>10.15</th>
-                <td>10:00 ~ 11:00</td>
-                <td>ゲームに関するアンケート</td>
-              </tr>
-              <tr>
-                <th>10.15</th>
-                <td>10:00 ~ 11:00</td>
-                <td>ゲームに関するアンケート</td>
-              </tr>
-              <tr>
-                <th>10.15</th>
-                <td>10:00 ~ 11:00</td>
-                <td>ゲームに関するアンケート</td>
-              </tr>
-              <tr>
-                <th>10.15</th>
-                <td>10:00 ~ 11:00</td>
-                <td>ゲームに関するアンケート</td>
-              </tr>
-              <tr>
-                <th>10.15</th>
-                <td>10:00 ~ 11:00</td>
-                <td>ゲームに関するアンケート</td>
-              </tr>
-           </tbody>
+              <% if @reserved_research %>
+                <% @reserved_research.each do |r| %>
+                  <tr>
+                    <td><%= r %></td>
+                  </tr>
+                <% end %>
+              <% end %>
+            </tbody>
           </table>
         </div>
       </div>

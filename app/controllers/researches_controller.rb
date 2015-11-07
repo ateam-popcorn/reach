@@ -1,6 +1,20 @@
 class ResearchesController < ApplicationController
   def index
+    @participants = Participant.where(user_id: current_user.id)
+    
+    @reserved_meetings = Array.new
+    @participants.each do |p|
+      @reserved_meetings.push(Meeting.find(p.meeting_id))
+    end
+
+    @reserved_research = Array.new
+    @reserved_meetings.each do |r|
+      research = Research.find(r.research_id)
+      @reserved_research.push([title: research.title, meeting_it: r.id, start_at: r.start_at])
+    end
+
     @researches = Research.all
+    @meetings = Meeting.all
   end
 
   def show
