@@ -1,5 +1,58 @@
 <% if current_user.role == "user" %>
   <h1>userでログイン</h1>
+  <div class="row">
+    <div class="col-md-5 pull-left">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <p><%= current_user.email %></p>
+        </div>
+        <div class="panel-body">
+          <p>現在のランク<img src="bronze.png" alt="ブロンズ"></p>
+          <p>あと<strong>5</strong>回の会議参加で<img src="silver.png" alt="シルバー"></p>
+          <button type="button" class="btn btn-primary">ポイント確認</button>
+          <button type="button" class="btn btn-primary">登録情報変更</button>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-7 pull-right">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <p>予約中のアンケート</p>
+        </div>
+        <div class="panel-body">
+          <table class="table">
+            <tbody>
+              <tr>
+                <th>10.15</th>
+                <td>10:00 ~ 11:00</td>
+                <td>ゲームに関するアンケート</td>
+              </tr>
+              <tr>
+                <th>10.15</th>
+                <td>10:00 ~ 11:00</td>
+                <td>ゲームに関するアンケート</td>
+              </tr>
+              <tr>
+                <th>10.15</th>
+                <td>10:00 ~ 11:00</td>
+                <td>ゲームに関するアンケート</td>
+              </tr>
+              <tr>
+                <th>10.15</th>
+                <td>10:00 ~ 11:00</td>
+                <td>ゲームに関するアンケート</td>
+              </tr>
+              <tr>
+                <th>10.15</th>
+                <td>10:00 ~ 11:00</td>
+                <td>ゲームに関するアンケート</td>
+              </tr>
+           </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 <% elsif current_user.role == "company"%>
   <h1>companyでログイン</h1>
   <%= link_to "新規アンケート作成", new_research_path %>
@@ -32,14 +85,14 @@
               <% participant = meeting.participants.find_by(user: current_user) %>
               <% if participant %>
                 <%= link_to 'キャンセル',
-                            participant_path(participant),
-                            method: 'delete',
-                            class: 'btn btn-danger' %>
+                  participant_path(participant),
+                  method: 'delete',
+                  class: 'btn btn-danger' %>
               <% else %>
                 <%= link_to '予約',
-                            meeting_participants_path(meeting),
-                            method: 'post',
-                            class: 'btn btn-primary' %>
+                  meeting_participants_path(meeting),
+                  method: 'post',
+                  class: 'btn btn-primary' %>
               <% end %>
             </td>
           </tr>
