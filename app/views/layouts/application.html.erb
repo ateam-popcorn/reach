@@ -20,7 +20,7 @@
                   <li><%= link_to 'プロフィール変更', edit_user_registration_path %></li>
                   <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
                 <% else %>
-                  <li><a>企業の方はこちら</a></li>
+                  <li><%= link_to "企業の方はコチラ", home_index_for_client_path %></a></li>
                   <li><%= link_to "サインイン", new_user_registration_path %></li>
                   <li><%= link_to "ログイン", new_user_session_path %></li>
                 <% end %>

@@ -14,6 +14,7 @@ Rails.application.routes.draw do
   devise_for :users
   get 'home/index'
   get 'home/show'
+  get 'home/index_for_client'
 
   root 'home#index'
 
