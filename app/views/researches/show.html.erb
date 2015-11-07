@@ -1,0 +1,64 @@
+<h1><%= @research.title %></h1>
+
+<div class="panel panel-default">
+  <table class="table">
+    <thead>
+      <th>start_at</th>
+      <th>end_at</th>
+      <th>reward</th>
+      <th>max_users</th>
+      <th>min_users</th>
+    </thead>
+    <tbody>
+      <tr>
+        <% r = @research%>
+        <td><%= r.start_at %></td>
+        <td><%= r.end_at %></td>
+        <td><%= r.reward %></td>
+        <td><%= r.max_users %></td>
+        <td><%= r.min_users %></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<h2>会議室一覧</h2>
+<div class="panel panel-default">
+  <table class="table">
+    <thead>
+      <th>start_at</th>
+      <th>end_at</th>
+    </thead>
+    <tbody>
+      <% @research.meetings.each do |m| %>
+        <tr>
+          <td><%= m.start_at %></td>
+          <td><%= m.end_at %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+
+<h2>新規会議室作成</h2>
+<%= form_for [@research, @research.meetings.build] do |f| %>
+  <div class="panel panel-default">
+    <table class="table">
+      <thead>
+        <th>start_at</th>
+        <th>end_at</th>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= f.datetime_select :start_at, use_month_numbers: true, minute_step: 10 %></td>
+          <td><%= f.datetime_select :end_at, use_month_numbers: true, minute_step: 10 %></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <%= f.submit %>
+<% end %>
+
+<div>
+  <%= link_to "マイページ", researches_path %>
+</div>

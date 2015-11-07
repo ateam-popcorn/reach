@@ -2,11 +2,12 @@
   <h1>userでログイン</h1>
 <% elsif current_user.role == "company"%>
   <h1>companyでログイン</h1>
+  <%= link_to "新規アンケート作成", new_research_path %>
 <% end %>
 
 <% @researches.each do |research| %>
   <div class="panel panel-default">
-    <div class="panel-heading"><%= research.title %></div>
+    <div class="panel-heading"><%= link_to research.title, research_path(research.id) %></div>
     <div class="panel-body">
       <p>TODO: 調査内容</p>
     </div>
