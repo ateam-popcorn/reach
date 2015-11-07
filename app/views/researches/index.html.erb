@@ -10,7 +10,7 @@
           <p>現在のランク<img src="bronze.png" alt="ブロンズ"></p>
           <p>あと<strong>5</strong>回の会議参加で<img src="silver.png" alt="シルバー"></p>
           <button type="button" class="btn btn-primary">ポイント確認</button>
-          <button type="button" class="btn btn-primary">登録情報変更</button>
+          <%= link_to "登録情報変更", edit_user_registration_path, class: "btn btn-primary"%>
         </div>
       </div>
     </div>
