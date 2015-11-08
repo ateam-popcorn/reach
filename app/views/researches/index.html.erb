@@ -25,7 +25,8 @@
               <% if @reserved_research %>
                 <% @reserved_research.each do |r| %>
                   <tr>
-                    <td><%= r %></td>
+                    <td><%= r[:start_at] %></td>
+                    <td><%= link_to r[:title], meeting_room_path(r[:meeting_id]) %></td>
                   </tr>
                 <% end %>
               <% end %>

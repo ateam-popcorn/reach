@@ -10,7 +10,8 @@ class ResearchesController < ApplicationController
     @reserved_research = Array.new
     @reserved_meetings.each do |r|
       research = Research.find(r.research_id)
-      @reserved_research.push([title: research.title, meeting_it: r.id, start_at: r.start_at])
+      hash = {title: research.title, meeting_id: r.id, start_at: r.start_at}
+      @reserved_research.push(Hash[hash])
     end
 
     @researches = Research.all
