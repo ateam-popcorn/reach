@@ -26,7 +26,8 @@
                 <% @reserved_research.each do |r| %>
                   <tr>
                     <td><%= r[:start_at] %></td>
-                    <td><%= link_to r[:title], meeting_room_path(r[:meeting_id]) %></td>
+                    <td><%= r[:title] %></td>
+                    <td><%= link_to "入室", meeting_room_path(r[:meeting_id]), class: "btn btn-primary" %></td>
                   </tr>
                 <% end %>
               <% end %>
