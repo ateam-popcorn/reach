@@ -1,5 +1,4 @@
 <% if current_user.role == "user" %>
-  <h1>userでログイン</h1>
   <div class="row">
     <div class="col-md-5 pull-left">
       <div class="panel panel-default">
@@ -22,13 +21,23 @@
         <div class="panel-body">
           <table class="table">
             <tbody>
-              <% if @reserved_research %>
-                <% @reserved_research.each do |r| %>
-                  <tr>
-                    <td><%= r[:start_at] %></td>
-                    <td><%= r[:title] %></td>
-                    <td><%= link_to "入室", meeting_room_path(r[:meeting_id]), class: "btn btn-primary" %></td>
-                  </tr>
+              <% @researches.each do |research|%>
+                <% research.meetings.each do |meeting| %>
+                  <% participant = meeting.participants.find_by(user: current_user) %>
+                  <% if participant %>   
+                    <tr>
+                      <td><%= meeting.id %></td>
+                      <td><%= meeting.start_at  %></td>
+                      <td><%= research.title %></td>
+                      <td><%= link_to "入室", meeting_room_path(meeting.id), class: "btn btn-primary" %></td>
+                      <td>
+                        <%= link_to 'キャンセル',
+                          participant_path(participant),
+                          method: 'delete',
+                          class: 'btn btn-danger' %>
+                    </td>
+                    </tr>
+                  <% end %>
                 <% end %>
               <% end %>
             </tbody>
@@ -42,46 +51,79 @@
   <%= link_to "新規アンケート作成", new_research_path %>
 <% end %>
 
-<% @researches.each do |research| %>
+<% if current_user.role == "user" %>
   <div class="panel panel-default">
-    <div class="panel-heading"><%= link_to research.title, research_path(research.id) %></div>
+    <div class="panel-heading">
+      募集中のアンケート
+    </div>
     <div class="panel-body">
-      <p>TODO: 調査内容</p>
+      <div class="row">
+        <% @researches.each do |research|%>
+          <% research.meetings.each do |meeting| %>
+            <% participant = meeting.participants.find_by(user: current_user) %>
+            <% if !participant %>
+              <div class="col-md-4">
+                <div class="panel panel-default">
+                  <div class="panel-heading">
+                    <%= research.title %>
+                  </div>
+                  <div class="panel-body">
+                    <p><%= meeting.id %>, <%= meeting.start_at %></p>
+                    <%= link_to '予約',
+                      meeting_participants_path(meeting),
+                      method: 'post',
+                      class: 'btn btn-primary' %>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
+        <% end %>
+      </div>
     </div>
 
-    <table class="table">
-      <thead>
-        <th>#</th>
-        <th>開始日時</th>
-        <th>終了日時</th>
-        <th>参加者</th>
-        <th></th>
-      </thead>
+  <% elsif current_user.role == "company" %>
+    <% @researches.each do |research| %>
+      <div class="panel panel-default">
+        <div class="panel-heading"><%= link_to research.title, research_path(research.id) %></div>
+        <div class="panel-body">
+          <p>TODO: 調査内容</p>
+        </div>
 
-      <tbody>
-        <% research.meetings.each_with_index do |meeting, i| %>
-          <tr>
-            <td><%= i + 1 %></td>
-            <td><%= meeting.start_at %></td>
-            <td><%= meeting.end_at %></td>
-            <td><%= meeting.users.count %> / <%= research.max_users %></td>
-            <td>
-              <% participant = meeting.participants.find_by(user: current_user) %>
-              <% if participant %>
-                <%= link_to 'キャンセル',
-                  participant_path(participant),
-                  method: 'delete',
-                  class: 'btn btn-danger' %>
-              <% else %>
-                <%= link_to '予約',
-                  meeting_participants_path(meeting),
-                  method: 'post',
-                  class: 'btn btn-primary' %>
-              <% end %>
-            </td>
-          </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
-<% end %>
+        <table class="table">
+          <thead>
+            <th>#</th>
+            <th>開始日時</th>
+            <th>終了日時</th>
+            <th>参加者</th>
+            <th></th>
+          </thead>
+
+          <tbody>
+            <% research.meetings.each_with_index do |meeting, i| %>
+              <tr>
+                <td><%= i + 1 %></td>
+                <td><%= meeting.start_at %></td>
+                <td><%= meeting.end_at %></td>
+                <td><%= meeting.users.count %> / <%= research.max_users %></td>
+                <td>
+                  <% participant = meeting.participants.find_by(user: current_user) %>
+                  <% if participant %>
+                    <%= link_to 'キャンセル',
+                      participant_path(participant),
+                      method: 'delete',
+                      class: 'btn btn-danger' %>
+                  <% else %>
+                    <%= link_to '予約',
+                      meeting_participants_path(meeting),
+                      method: 'post',
+                      class: 'btn btn-primary' %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    <% end %>
+  <% end %>
