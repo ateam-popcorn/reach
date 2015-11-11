@@ -6,9 +6,9 @@
     <%= csrf_meta_tags %>
   </head>
   <body>
-    <div class="container">
-      <header>
-        <nav class="navbar navbar-default">
+    <header>
+      <nav class="navbar navbar-default">
+        <div class="container">
           <div class="navbar-header">
             <% if user_signed_in? %>
               <a class="navbar-brand" href="/researches"><%= image_tag("logo.png", :height => "100%") %></a>
@@ -31,12 +31,11 @@
               </ul>
             </div>
           </div>
-        </nav>
-      </header>
+      </nav>
+    </header>
 
-      <%= yield %>
+    <%= yield %>
 
-    </div>
     <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   </body>
 </html>
