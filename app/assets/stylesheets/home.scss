@@ -1,3 +1,25 @@
 // Place all the styles related to the Home controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+div#user_top{
+  height: 1204px;
+  width: 1280px;
+  margin: 0 auto;
+  background-image: image-url("user_top.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  text-align: center; 
+}
+
+div.btn-sign-up{
+  position: relative;
+  top: 560px;
+  margin: 0 auto;
+}
+
+a.btn-sign-up{
+  width: 100%; 
+}
+
+
