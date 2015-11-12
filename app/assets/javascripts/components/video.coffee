@@ -3,10 +3,8 @@ Vue.component 'survay-video',
   props: ['src', 'width', 'height', 'caption', 'selfy']
 
   events:
-    'SurvayUseMedia:mediaGetSucceeded': (stream) ->
-      console.debug 'hoge'
-      if @selfy
-        @src = window.URL.createObjectURL(stream)
+    'SurvayUseMedia:mediaGetSucceeded': (sender, stream) ->
+      @src = window.URL.createObjectURL(stream) if @selfy
 
   data: ->
     loaded: false

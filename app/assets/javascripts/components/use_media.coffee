@@ -7,7 +7,24 @@ Vue.component 'survay-use-media',
 
   methods:
     mediaGetSucceeded: (stream) ->
-      @$broadcast('SurvayUseMedia:mediaGetSucceeded', stream)
+      @$audioContext = new AudioContext()
+      source = @$audioContext.createMediaStreamSource(stream)
+      @$analyser = @$audioContext.createAnalyser()
+
+      source.connect(@$analyser)
+      @$analyser.connect(@$audioContext.destination)
+
+      @$broadcast('SurvayUseMedia:mediaGetSucceeded', @, stream)
 
     mediaGetFailed: (err) ->
       console.error err
+
+    getVoiceVolume: ->
+      array = new Uint8Array(@$analyser.frequencyBinCount)
+      @$analyser.getByteFrequencyData(array)
+
+      sum = 0
+      for v in array
+        sum += v
+
+      sum / array.length
