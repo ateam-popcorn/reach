@@ -1,41 +1,61 @@
-<div class="user">
-  <div class="container">
-    <div class="col-md-4">
-      <div class="user_panel">
-        <div class="panel panel-default user_panel_back">
-          <div class="panel-body">
-            <%= image_tag("logo.png", class: "logo") %>
-            <h2>ログイン</h2>
-            <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-              <div class="field">
-                <%= f.label :email %><br />
-                <%= f.email_field :email, autofocus: true, class: "form-control" %>
-              </div>
+<% if URI(request.referer).path == '/home/index_for_client' %>
+  <div class="client">
+  <% else %>
+    <div class="user">
+    <% end %>
+    <div class="container">
+      <% if URI(request.referer).path == '/home/index_for_client' %>
+        <div class="col-md-7">
+        </div>
+        <div class="col-md-3">
+          <div class="client_panel">
+          <% else %>
+            <div class="col-md-4">
+              <div class="user_panel">
+              <% end %>
+              <% if URI(request.referer).path == '/home/index_for_client' %>
+                <div class="panel panel-default client_panel_back">
+                  <div class="panel-body client_panel_body">
+                  <% else %>
+                    <div class="panel panel-default user_panel_back">
+                      <div class="panel-body">
+                      <% end %>
+                      <%= image_tag("logo.png", class: "logo") %>
+                      <h2>ログイン</h2>
+                      <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+                        <div class="field">
+                          <%= f.label :email %><br />
+                          <%= f.email_field :email, autofocus: true, class: "form-control" %>
+                        </div>
 
-              <div class="field">
-                <%= f.label :password %><br />
-                <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
-              </div>
+                        <div class="field">
+                          <%= f.label :password %><br />
+                          <%= f.password_field :password, autocomplete: "off", class: "form-control" %>
+                        </div>
 
-              <% if devise_mapping.rememberable? -%>
-                <div class="field">
-                  <%= f.check_box :remember_me %>
-                  <%= f.label "次回から自動でログインする" %>
+                        <% if devise_mapping.rememberable? -%>
+                          <div class="field">
+                            <%= f.check_box :remember_me %>
+                            <%= f.label "次回から自動でログインする" %>
+                          </div>
+                        <% end -%>
+
+                        <div class="actions btn-right">
+                          <%= f.submit "Log in", class: "btn" %>
+                        </div>
+                      <% end %>
+
+                      <%= link_to "パスワードを忘れた方はこちら", "password/new" %> 
+                      </div>
+                    </div>
+                    <div>
+                      <% if URI(request.referer).path == '/home/index_for_client' %>
+                        <%= link_to "新規会員登録はコチラ", "sign_up", class: "btn btn-primary btn-lg btn-to-login" %>
+                      <% else %>
+                        <%= link_to "新規会員登録はコチラ", "sign_up", class: "btn btn-danger btn-lg btn-to-login" %>
+                      <% end %>
+                    </div>
+                  </div>
                 </div>
-              <% end -%>
-
-              <div class="actions btn-right">
-                <%= f.submit "Log in", class: "btn" %>
               </div>
-            <% end %>
-
-            <%= link_to "パスワードを忘れた方はこちら", "password/new" %> 
-          </div>
-        </div>
-        <div>
-          <%= link_to "新規会員登録はコチラ", "sign_up", class: "btn btn-danger btn-lg btn-to-login" %>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
+            </div>

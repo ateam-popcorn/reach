@@ -1,3 +1,13 @@
+div.client{
+  width: 1012px;
+  height: 343px;
+  margin: 0 auto;
+  background-image: image-url("client_login_bg.png");
+  background-position: center center;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
 div.user{
   width: 1280px;
   height: 800px;
@@ -13,8 +23,22 @@ div.user_panel{
   top: 150px;
 }
 
+div.user_panel{
+  position: relative;
+  top: 150px;
+}
+
+div.client_panel_back{
+  background-color: rgba(255, 255, 255, 0);
+  border-style: none;
+}
+
 div.user_panel_back{
   background-color: rgba(255, 255, 255, 0.8);
+}
+
+div.client_panel_body{
+  padding: 0px;
 }
 
 img.logo{
