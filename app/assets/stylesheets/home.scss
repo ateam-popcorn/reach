@@ -3,14 +3,25 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 div#user_top{
-  height: 1204px;
   width: 1280px;
+  height: 1204px;
   margin: 0 auto;
   background-image: image-url("user_top.png");
   background-position: center center;
   background-repeat: no-repeat;
   text-align: center; 
 }
+
+div#client_top{
+  width: 1280px;
+  height: 1189px;
+  margin: 0 auto;
+  background-image: image-url("client_top.png");
+  background-position: center center;
+  background-repeat: no-repeat;
+  text-align: center; 
+}
+
 
 div.btn-sign-up{
   position: relative;
