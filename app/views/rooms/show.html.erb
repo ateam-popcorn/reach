@@ -1,20 +1,23 @@
-<div class="container">
-  <div class="row">
-    <div class="col-xs-3">
-      <h1><%= @meeting.research.title %></h1>
-      <%= @meeting.start_at %> - <%= @meeting.end_at %>
-      myself
-      <ul class="nav nav-tabs">
-        <li class="active"><a href="#">ノート</a></li>
-      </ul>
-      <textarea class="form-control" rows="10"></textarea>
-    </div>
+<survay-use-media>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-3">
+        <h1><%= @meeting.research.title %></h1>
+        <%= @meeting.start_at %> - <%= @meeting.end_at %>
+        <survay-video selfy="true"></survay-video>
+        <ul class="nav nav-tabs">
+          <li class="active"><a href="#">ノート</a></li>
+        </ul>
+        <textarea class="form-control" rows="10"></textarea>
+      </div>
 
-    <div class="col-xs-9">
-      <survay-chat-container room-token="token" meeting-id="<%= params[:meeting_id] %>"></survay-chat-container>
+      <div class="col-xs-9">
+        <survay-chat-container room-token="token" meeting-id="<%= params[:meeting_id] %>"></survay-chat-container>
+      </div>
     </div>
   </div>
-</div>
+</survay-use-media>
+
 <% # for components of Vue.js %>
 <%= render partial: 'vue/chat_container' %>
 <%= render partial: 'vue/video' %>
