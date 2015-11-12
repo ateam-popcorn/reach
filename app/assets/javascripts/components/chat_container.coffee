@@ -13,9 +13,10 @@ Vue.component 'survay-chat-container',
       channel = ws.subscribe "meetings_#{@meetingId}", =>
         channel.bind 'member_joined', @memberJoined
 
-        config = { audio: true, video: true }
-        navigator.getUserMedia(config, @mediaGetSucceeded, @mediaGetFailed)
-
+    'SurvayUseMedia:mediaGetSucceeded': (stream) ->
+      console.log 'mediaGetSucceeded', stream
+      @$localStream = stream
+      @joinRoom(@meetingId)
 
   methods:
     joinRoom: (meetingId) ->
@@ -48,14 +49,6 @@ Vue.component 'survay-chat-container',
 
       return if @findConnection(caller.email)
       @$peer.call(call.peer, @$localStream, metadata: { user: @user })
-
-    mediaGetSucceeded: (stream) ->
-      console.log 'mediaGetSucceeded', stream
-      @$localStream = stream
-      @joinRoom(@meetingId)
-
-    mediaGetFailed: (err) ->
-      console.error(err)
 
     addConnection: (caller, peer, streamURL) ->
       connection = @findConnection(caller.email)
