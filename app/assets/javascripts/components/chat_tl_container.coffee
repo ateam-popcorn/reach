@@ -18,9 +18,7 @@ Vue.component 'survay-chat-tl-container',
     sendMessage: (event) ->
       user_name = $('#username').text()
       msg_body = $('#msgbody').val()
-      @dispatcher.trigger 'rooms/new_message', { name: user_name , body: msg_body }
-      $('#msgbody').val('')
-      $('#chat').append msg_body
+      @dispatcher.trigger 'new_message', { name: user_name , body: msg_body }
 
     receiveMessage: (message) ->
       console.log message
