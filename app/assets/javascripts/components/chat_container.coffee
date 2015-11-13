@@ -9,7 +9,7 @@ Vue.component 'survay-chat-container',
 
   events:
     'hook:created': ->
-      @$userConnections = {}
+      @$connections = {} # peer => MediaConnection
 
     'SurvayUseMedia:mediaGetSucceeded': (sender, stream) ->
       console.log 'mediaGetSucceeded', stream
@@ -68,21 +68,20 @@ Vue.component 'survay-chat-container',
 
       @addConnection(data.user, data.peer_id, null)
       call = @$peer.call(data.peer_id, @$localStream)
-      call.on 'stream', @streamReceived(call)
+      @waitStream(call)
 
     callReceived: (call) ->
       console.debug 'callReceived', call
       call.answer(@$localStream)
-
-      call.on 'stream', @streamReceived(call)
-
-      console.log @$localStream
+      @waitStream(call)
 
       # return if @userConnections[caller.email]
       # @$peer.call(call.peer, @$localStream, metadata: { user: @user })
 
-    streamReceived: (call) ->
-      (stream) =>
+    waitStream: (call) ->
+      @$connections[call.peer] = call
+
+      call.on 'stream', (stream) =>
         console.debug 'streamReceived', stream
         @setStream(call.peer, window.URL.createObjectURL(stream))
 
@@ -93,13 +92,20 @@ Vue.component 'survay-chat-container',
           @userConnections[conn.label].volume = data.volume
 
     addConnection: (user, peer, streamUrl) ->
-      c =
+      newConn =
         user: user
         peer: peer
         streamUrl: streamUrl
         volume: 0
-      Vue.set @userConnections, user.email, c
-      Vue.set @peerConnections, peer, c
+
+      oldConn = @userConnections[user.email]
+      if oldConn
+        console.debug 'Close old connection'
+        @$connections[oldConn.peer].close()
+        @peerConnections[oldConn.peer] = null
+
+      Vue.set @userConnections, user.email, newConn
+      Vue.set @peerConnections, peer, newConn
 
     setStream: (peer, streamUrl) ->
       c = @peerConnections[peer]
