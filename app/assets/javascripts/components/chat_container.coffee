@@ -41,12 +41,12 @@ Vue.component 'survay-chat-container',
         @user = data.user
 
         # send a mic volume
-        setInterval =>
-          @$ws.trigger 'volume.update',
-            email: @user.email
-            volume: @$userMediaVm.getVoiceVolume()
-            meeting_id: @meetingId
-        , 100
+        # setInterval =>
+        #   @$ws.trigger 'volume.update',
+        #     email: @user.email
+        #     volume: @$userMediaVm.getVoiceVolume()
+        #     meeting_id: @meetingId
+        # , 500
       else
         @$peer.call(data.peer_id, @$localStream, metadata: { user: @user })
 
