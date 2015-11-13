@@ -22,6 +22,11 @@ class RoomsController < ApplicationController
   def leave
   end
 
+  def new_message
+    logger.debug("Call new_message : #{message}")
+    broadcast_message :new_message, message
+  end
+
   private
 
   def set_meeting
