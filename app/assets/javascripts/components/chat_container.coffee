@@ -22,7 +22,12 @@ Vue.component 'survay-chat-container',
 
   methods:
     joinRoom: (meetingId, cb) ->
-      @$peer = new Peer(key: 'y7i7yij7g2pgb9')
+      @$peer = new Peer
+        host: 'pop-survey-peerjs-server.herokuapp.com'
+        port: 443
+        secure: true
+        path: '/'
+
       @$peer.on 'open', (id) =>
         console.log "my peer id: #{id}"
         $.post("/meetings/#{meetingId}/room/member", peer_id: id).done =>
