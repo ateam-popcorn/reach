@@ -8,8 +8,9 @@ Rails.application.routes.draw do
       resources :participants, only: [:create, :destroy]
       resource :room, only: [:show] do
         member do
-          post :member, action: 'join'
-          delete :member, action: 'leave'
+          post :join
+          post :welcome
+          delete :leave
         end
       end
     end

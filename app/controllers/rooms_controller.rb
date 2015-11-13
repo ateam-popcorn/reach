@@ -1,30 +1,43 @@
 class RoomsController < ApplicationController
-  before_action :authenticate_user!
   before_action :set_meeting
+  before_action :authenticate_user!
+  before_action :authenticate_meeting_member!
 
   def show
   end
 
   def join
-    if @meeting.users.find_by(id: current_user.id)
-      p "meetings_#{params[:meeting_id]}"
-      WebsocketRails["meetings_#{params[:meeting_id]}"].trigger(
-        :member_joined,
-        peer_id: params[:peer_id], user: current_user
-      )
+    WebsocketRails[channel].trigger(
+      :member_joined,
+      peer_id: params[:peer_id], user: current_user
+    )
 
-      head :created
-    else
-      head :forbidden
-    end
+    head :ok
   end
 
   def leave
   end
 
+  def welcome
+    WebsocketRails[channel].trigger(
+      :welcome_received,
+      peer_id: params[:peer_id], user: current_user
+    )
+
+    head :ok
+  end
+
   private
+
+  def channel
+    "meetings_#{@meeting.id}"
+  end
 
   def set_meeting
     @meeting = Meeting.find(params[:meeting_id])
+  end
+
+  def authenticate_meeting_member!
+    head :forbidden unless @meeting.users.find_by(id: current_user.id)
   end
 end
