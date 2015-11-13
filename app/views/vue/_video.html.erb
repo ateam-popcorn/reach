@@ -2,7 +2,14 @@
   <div class="survay-video">
     <p v-if="caption && loaded" class="caption">{{ caption }}</p>
     <div class="embed-responsive embed-responsive-4by3">
-      <video v-el:video :src="src" :width="width" :height="height" autoplay class="embed-responsive-item"></video>
+      <video
+        v-el:video
+        :src="src"
+        :width="width"
+        :height="height"
+        :muted="selfy"
+        autoplay
+        class="embed-responsive-item"></video>
     </div>
   </div>
 </script>
