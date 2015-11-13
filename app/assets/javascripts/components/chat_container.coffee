@@ -9,16 +9,19 @@ Vue.component 'survay-chat-container',
   events:
     'hook:created': ->
       @$connections = {}
-      @$ws = new WebSocketRails("#{location.host}/websocket")
-      memberChannel = @$ws.subscribe "meetings_#{@meetingId}", =>
-        memberChannel.bind 'member_joined', @memberJoined
-        memberChannel.bind 'volume_received', @volumeReceived
 
     'SurvayUseMedia:mediaGetSucceeded': (sender, stream) ->
       console.log 'mediaGetSucceeded', stream
       @$localStream = stream
       @$userMediaVm = sender
-      @joinRoom @meetingId
+
+      @$ws = new WebSocketRails("#{location.host}/websocket")
+      memberChannel = @$ws.subscribe "meetings_#{@meetingId}", =>
+        memberChannel.bind 'member_joined', @memberJoined
+        memberChannel.bind 'volume_received', @volumeReceived
+
+      @$ws.on_open = =>
+        @joinRoom @meetingId
 
   methods:
     joinRoom: (meetingId, cb) ->
