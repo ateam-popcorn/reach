@@ -3,26 +3,31 @@ Vue.component 'survay-chat-container',
   props: ['roomToken', 'meetingId']
 
   data: ->
-    connections: {}
+    userConnections: {} # email => {user, peer, streamURL}
+    peerConnections: {} # peer  => {user, peer, streamURL}
     user: null
 
   events:
     'hook:created': ->
-      @$connections = {}
-      @$ws = new WebSocketRails("#{location.host}/websocket")
-      memberChannel = @$ws.subscribe "meetings_#{@meetingId}", =>
-        memberChannel.bind 'member_joined', @memberJoined
-        memberChannel.bind 'volume_received', @volumeReceived
+      @$userConnections = {}
 
     'SurvayUseMedia:mediaGetSucceeded': (sender, stream) ->
       console.log 'mediaGetSucceeded', stream
       @$localStream = stream
       @$userMediaVm = sender
-      @joinRoom @meetingId
+
+      @$ws = new WebSocketRails("#{location.host}/websocket")
+      memberChannel = @$ws.subscribe "meetings_#{@meetingId}", =>
+        memberChannel.bind 'member_joined', @memberJoined
+        memberChannel.bind 'volume_received', @volumeReceived
+        memberChannel.bind 'welcome_received', @welcomeReceived
+
+      @$ws.on_open = =>
+        @joinRoom @meetingId
 
   methods:
     joinRoom: (meetingId, cb) ->
-      @$peer = new Peer
+      @$peer = new Peer null,
         host: 'pop-survey-peerjs-server.herokuapp.com'
         port: 443
         secure: true
@@ -30,7 +35,7 @@ Vue.component 'survay-chat-container',
 
       @$peer.on 'open', (id) =>
         console.log "my peer id: #{id}"
-        $.post("/meetings/#{meetingId}/room/member", peer_id: id).done =>
+        $.post("/meetings/#{meetingId}/room/join", peer_id: id).done =>
           cb() if cb
 
       @$peer.on 'call', @callReceived
@@ -38,6 +43,8 @@ Vue.component 'survay-chat-container',
 
     memberJoined: (data) ->
       if @$peer.id == data.peer_id
+        console.debug 'joinSuccess', data
+
         @user = data.user
 
         # send a mic volume
@@ -48,50 +55,65 @@ Vue.component 'survay-chat-container',
         #     meeting_id: @meetingId
         # , 500
       else
-        @$peer.call(data.peer_id, @$localStream, metadata: { user: @user })
+        console.debug 'memberJoined', data
+        $.post "/meetings/#{@meetingId}/room/welcome",
+          peer_id: @$peer.id
+          user: @user
+
+        @addConnection(data.user, data.peer_id, null)
+
+    welcomeReceived: (data) ->
+      return if @$peer.id == data.peer_id
+      console.debug 'welcomeReceived', data
+
+      @addConnection(data.user, data.peer_id, null)
+      call = @$peer.call(data.peer_id, @$localStream)
+      call.on 'stream', @streamReceived(call)
 
     callReceived: (call) ->
-      console.log 'callReceived', call
-      caller = call.metadata.user
-
+      console.debug 'callReceived', call
       call.answer(@$localStream)
-      call.on 'stream', (stream) =>
-        console.log 'streamReceived', stream
-        console.log call, stream
 
-        Vue.set @connections, caller.email,
-          caller: caller
-          peer: call.peer
-          streamURL: window.URL.createObjectURL(stream)
-          volume: 0
+      call.on 'stream', @streamReceived(call)
 
-      return if @connections[caller.email]
-      @$peer.call(call.peer, @$localStream, metadata: { user: @user })
+      console.log @$localStream
 
-    volumeReceived: (data) ->
-      return if !@user || @user.email == data.email
-      @connections[data.email]?.volume = data.volume
+      # return if @userConnections[caller.email]
+      # @$peer.call(call.peer, @$localStream, metadata: { user: @user })
 
-      sum = 0
-
-      for _, c of @connections
-        sum += c.volume
-
-      @averageVolume = sum / Object.keys(@connections).length
+    streamReceived: (call) ->
+      (stream) =>
+        console.debug 'streamReceived', stream
+        @setStream(call.peer, window.URL.createObjectURL(stream))
 
     connectionReceived: (conn) ->
       conn.on 'open', =>
         conn.on 'data', (data) =>
           console.debug 'dataReceived', conn.label, data
-          @connections[conn.label].volume = data.volume
+          @userConnections[conn.label].volume = data.volume
 
-    addConnection: (caller, peer, streamURL) ->
-      connection = @findConnection(caller.email)
+    addConnection: (user, peer, streamUrl) ->
+      c =
+        user: user
+        peer: peer
+        streamUrl: streamUrl
+        volume: 0
+      Vue.set @userConnections, user.email, c
+      Vue.set @peerConnections, peer, c
 
-      if connection
-        connection.caller = caller
-        connection.peer = peer
-        connection.streamURL = streamURL
-      else
-        @connections[caller.email] =
-          caller: caller, peer: peer, streamURL: streamURL
+    setStream: (peer, streamUrl) ->
+      c = @peerConnections[peer]
+      c.streamUrl = streamUrl
+
+      #Vue.set @userConnections, c.user.email, c
+
+    # volumeReceived: (data) ->
+    #   return if !@user || @user.email == data.email
+    #   @userConnections[data.email]?.volume = data.volume
+    #
+    #   sum = 0
+    #
+    #   for _, c of @userConnections
+    #     sum += c.volume
+    #
+    #   @averageVolume = sum / Object.keys(@userConnections).length
