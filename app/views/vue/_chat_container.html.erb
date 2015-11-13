@@ -1,9 +1,27 @@
 <script id="survay-chat-container" type="x-template">
-  <div class="row">
-    <div class="col-xs-6">
-      <div v-for="(_, c) in connections" >
-        <survay-video :src="c.streamURL" :caption="c.caller.email + '(' + c.volume + ')'"></survay-video>
-      </div>
+<div id="username" style="display:none;">
+  <% if user_signed_in? %>
+    <%= current_user.email %>
+  <% end %>
+</div>
+<div class="row">
+  <div class="col-xs-6">
+  </div>
+</div>
+<div class="row">
+  <div id="timeline" style="margin:20px;">
+    <div id="chat" data-uri="<%= request.host %>:3000/websocket"></div>
+    </div>
+
+    <form class="form-horizontal">
+      <input type="text" class="form-control" id="msgbody" />
+      <input type="button" class="btn btn-primary" v-on:click="bindEvent" value="送信" id="send" />
+    </form>
+
+    <div v-for="(_, c) in connections" >
+      <survay-video :src="c.streamURL" :caption="c.caller.email + '(' + c.volume + ')'">
+      </survay-video>
     </div>
   </div>
+</div>
 </script>

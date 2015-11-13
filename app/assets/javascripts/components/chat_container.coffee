@@ -90,3 +90,19 @@ Vue.component 'survay-chat-container',
       else
         @connections[caller.email] =
           caller: caller, peer: peer, streamURL: streamURL
+
+    bindEvent: () =>
+      $('#send').on 'click', @sendMessage
+      #@dispatcher.bind 'new_message', @receiveMessage
+
+    sendMessage: (event) =>
+      console.log 'fuga'
+      user_name = $('#username').text()
+      msg_body = $('#msgbody').val()
+      @dispatcher.trigger 'new_message', { name: user_name , body: msg_body }
+      $('#msgbody').val('')
+
+    #receiveMessage: (message) =>
+      #console.log message
+      #$('#chat').append "#{message.name} [#{message.body}] <br\>"
+
