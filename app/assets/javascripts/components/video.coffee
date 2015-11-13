@@ -6,9 +6,6 @@ Vue.component 'survay-video',
     'SurvayUseMedia:mediaGetSucceeded': (sender, stream) ->
       return unless @selfy
       @src = window.URL.createObjectURL(stream)
-      # stream.getAudioTracks()[0].enabled = false
-      # stream.getAudioTracks()[0].muted = true
-      # console.log stream.getAudioTracks()[0]
 
   data: ->
     loaded: false
