@@ -14,4 +14,5 @@ WebsocketRails::EventMap.describe do
   namespace :volume do
     subscribe :update, to: VolumesController, with_method: :update
   end
+  subscribe :new_message, to: RoomsController, with_method: :new_message
 end
