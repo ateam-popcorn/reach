@@ -1,5 +1,9 @@
 <script id="survay-chat-container" type="x-template">
-  <div v-for="c in connections" >
-    <video :src="c.streamURL" autoplay></video>
+  <div class="row">
+    <div class="col-xs-6">
+      <div v-for="(_, c) in connections" >
+        <survay-video :src="c.streamURL" :caption="c.caller.email + '(' + c.volume + ')'"></survay-video>
+      </div>
+    </div>
   </div>
 </script>
