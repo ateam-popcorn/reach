@@ -5,7 +5,7 @@ Vue.component 'survay-chat-tl-container',
   data: ->
     connections: {}
     user: null
-
+  
   events:
     'hook:created': ->
       @dispatcher = new WebSocketRails("#{location.host}/websocket")
