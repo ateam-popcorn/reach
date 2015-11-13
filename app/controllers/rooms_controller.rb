@@ -22,9 +22,23 @@ class RoomsController < ApplicationController
   def leave
   end
 
+  def initialize_session
+    logger.debug("initialize chat controller")
+  end
+
+  def connect_user
+    logger.debug("connected user")
+  end
+
+  def new_message
+   logger.debug("Call new_message : #{message}")
+   broadcast_message :new_message, message
+  end
+
   private
 
   def set_meeting
     @meeting = Meeting.find(params[:meeting_id])
   end
+
 end
