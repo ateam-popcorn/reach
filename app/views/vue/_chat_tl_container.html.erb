@@ -1,0 +1,15 @@
+<script id="survay-chat-tl-container" type="x-template">
+  <div class="row">
+    <div id="username" style="display:none;"><%= current_user.email %></div>
+    <div id="timeline" style="margin:20px;">
+      <div id="chat" data-uri="<%= request.host %>:3001/websocket"></div>
+    </div>
+    <hr/>
+    <div>
+      <form class="form-horizontal">
+        <input type="text" class="form-control" id="msgbody" />
+        <input type="button" class="btn btn-primary" id="send" value="送信" v-on:click="bindEvents" />
+      </form>
+    </div>
+  </div>
+</script>
