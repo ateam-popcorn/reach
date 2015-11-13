@@ -46,7 +46,7 @@ Vue.component 'survay-chat-container',
             email: @user.email
             volume: @$userMediaVm.getVoiceVolume()
             meeting_id: @meetingId
-        , 100
+        , 500
       else
         @$peer.call(data.peer_id, @$localStream, metadata: { user: @user })
 
