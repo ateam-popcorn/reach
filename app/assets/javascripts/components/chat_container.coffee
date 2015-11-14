@@ -49,7 +49,7 @@ Vue.component 'survay-chat-container',
       @$peer.on 'error', (err) =>
         if err.type == 'disconnected'
           @$peer.reconnect()
-        
+
         console.debug(err.type, err)
 
     memberJoined: (data) ->
@@ -110,10 +110,10 @@ Vue.component 'survay-chat-container',
         volume: 0
 
       oldConn = @userConnections[user.email]
-      if oldConn
-        console.debug 'Close old connection'
-        @$connections[oldConn.peer].close()
-        @peerConnections[oldConn.peer] = null
+      # if oldConn
+      #   console.debug 'Close old connection'
+      #   @$connections[oldConn.peer].close()
+      #   @peerConnections[oldConn.peer] = null
 
       Vue.set @userConnections, user.email, newConn
       Vue.set @peerConnections, peer, newConn
