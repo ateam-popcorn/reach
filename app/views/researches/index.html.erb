@@ -8,7 +8,7 @@
           </div>
           <div class="panel-body">
             <p>現在のランク<%= image_tag "bronze.png" %></p>
-            <p>あと<strong>5</strong>回の会議参加で<%= image_tag"silver.png" %></p>
+            <p>あと<strong>5</strong>回の会議参加で<%= image_tag"silver.png", class: "next-rank" %></p>
             <button type="button" class="btn btn-primary">ポイント確認</button>
             <%= link_to "登録情報変更", edit_user_registration_path, class: "btn btn-primary"%>
           </div>
