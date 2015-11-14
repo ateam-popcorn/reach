@@ -7,7 +7,7 @@
   </head>
   <body>
     <header>
-      <nav class="navbar navbar-default">
+      <nav class="navbar navbar-default my-nav">
         <div class="container">
           <div class="navbar-header">
             <% if user_signed_in? %>
@@ -21,6 +21,7 @@
               <ul class="nav navbar-nav">
                 <% if user_signed_in? %>
                   <% if current_user.role === "user" %>
+                    <li><%= link_to '使い方', "#", id: "direction" %></li>
                     <li><%= link_to 'よくある質問', "#", id: "fqa-for-user" %></li>
                     <li><%= link_to 'お問い合わせ', "#", id: "contact-for-user" %></li>
                   <% elsif current_user.role === "company"%>
