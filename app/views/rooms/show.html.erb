@@ -1,12 +1,12 @@
 <survay-use-media>
   <div class="container">
     <h2><%= @meeting.research.title %></h2>
-    <%= @meeting.start_at %> - <%= @meeting.end_at %>
-    
+    <p><%= @meeting.start_at %> - <%= @meeting.end_at %></p>
+
     <div class="row">
       <div class="col-xs-3">
         <survay-video selfy="true"></survay-video>
-        <ul class="nav nav-tabs">
+        <ul class="nav nav-tabs" style="margin-top: 20px">
           <li class="active"><a href="#">ノート</a></li>
         </ul>
         <textarea class="form-control" rows="10"></textarea>

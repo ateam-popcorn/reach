@@ -1,15 +1,18 @@
 <script id="survay-chat-tl-container" type="x-template">
-  <div class="row">
-    <div id="username" style="display:none;"><%= current_user.email %></div>
-    <div id="timeline" style="margin:20px;">
-      <div id="chat" data-uri="<%= request.host %>:3001/websocket"></div>
-    </div>
-    <hr/>
-    <div>
-      <form class="form-horizontal">
-        <input type="text" class="form-control" id="msgbody" />
-        <input type="button" class="btn btn-primary" id="send" value="送信" v-on:click="bindEvents" />
-      </form>
+  <div class="comments">
+    <div v-for="c in comments" class="comment" style="margin-bottom: 5px">
+      <strong>{{ c.user.email }}</strong><br>
+      {{ c.comment }}
+      <hr>
     </div>
   </div>
+
+  <form class="form-horizontal" v-on:submit.prevent="sendMessage">
+    <div class="input-group">
+      <input v-model="newComment" type="text" class="form-control">
+      <span class="input-group-btn">
+        <input type="submit" class="btn btn-primary" value="送信">
+      </span>
+    </div>
+  </form>
 </script>

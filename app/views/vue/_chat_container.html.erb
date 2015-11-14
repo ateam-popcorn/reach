@@ -1,5 +1,5 @@
 <script id="survay-chat-container" type="x-template">
   <div v-for="(_, c) in userConnections" >
-    <survay-video :src="c.streamUrl" :caption="c.user.email + '(' + c.volume + ')'"></survay-video>
+    <survay-video :src="c.streamUrl" :caption="c.user.email"></survay-video>
   </div>
 </script>

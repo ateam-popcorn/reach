@@ -7,6 +7,8 @@ Rails.application.routes.draw do
     resources :meetings, only: [:new, :create], shallow: true do
       resources :participants, only: [:create, :destroy]
       resource :room, only: [:show] do
+        resources :comments, only: [:create]
+
         member do
           post :join
           post :welcome
