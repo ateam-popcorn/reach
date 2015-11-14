@@ -13,3 +13,19 @@
  *= require_tree .
  *= require_self
  */
+
+a#logout{
+  color: #111;
+  background-color: #999;
+}
+
+a#fqa-for-user,#contact-for-user{
+  color: red;
+  border-color: red;
+}
+
+a#fqa-for-client,#contact-for-client{
+  color: Blue;
+  border-color: Blue;
+}
+

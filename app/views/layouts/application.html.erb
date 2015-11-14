@@ -20,9 +20,14 @@
             <div class="pull-right">
               <ul class="nav navbar-nav">
                 <% if user_signed_in? %>
-                  <li><a>Logged in as <strong><%= current_user.email %></strong></a></li>
-                  <li><%= link_to 'プロフィール変更', edit_user_registration_path %></li>
-                  <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete %></li>
+                  <% if current_user.role === "user" %>
+                    <li><%= link_to 'よくある質問', "#", id: "fqa-for-user" %></li>
+                    <li><%= link_to 'お問い合わせ', "#", id: "contact-for-user" %></li>
+                  <% elsif current_user.role === "company"%>
+                    <li><%= link_to 'よくある質問', "#", id: "fqa-for-client" %></li>
+                    <li><%= link_to 'お問い合わせ', "#", id: "contact-for-client" %></li>
+                  <% end %>
+                  <li><%= link_to "ログアウト", destroy_user_session_path, method: :delete, id: "logout" %></li>
                 <% else %>
                   <li><%= link_to "企業の方はコチラ", home_index_for_client_path %></a></li>
                   <li><%= link_to "サインイン", new_user_registration_path %></li>
