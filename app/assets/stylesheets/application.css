@@ -13,3 +13,30 @@
  *= require_tree .
  *= require_self
  */
+
+nav.my-nav{
+  background-color: #fff;
+}
+
+a#logout{
+  color: #111;
+  background-color: #999;
+  padding: 0.6em 0.6em;
+  margin: 6px;
+}
+
+a#fqa-for-user,#contact-for-user,#direction{
+  color: red;
+  border: 1px solid red;
+  padding: 0.6em 0.6em;
+  margin: 6px;
+}
+
+a#fqa-for-client,#contact-for-client{
+  color: Blue;
+  border-color: blue;
+  border: 1px solid blue;
+  padding: 0.6em 0.6em;
+  margin: 6px;
+}
+
