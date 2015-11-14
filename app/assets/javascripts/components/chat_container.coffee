@@ -40,6 +40,11 @@ Vue.component 'survay-chat-container',
 
       @$peer.on 'call', @callReceived
       @$peer.on 'connection', @connectionReceived
+      @$peer.on 'error', (err) =>
+        console.error err
+
+        if err.type == 'disconnected'
+          @$peer.reconnect()
 
       @$peer.on 'error', (err) =>
         if err.type == 'disconnected'
