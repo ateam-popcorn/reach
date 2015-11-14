@@ -1,9 +1,10 @@
 <survay-use-media>
   <div class="container">
+    <h2><%= @meeting.research.title %></h2>
+    <%= @meeting.start_at %> - <%= @meeting.end_at %>
+    
     <div class="row">
       <div class="col-xs-3">
-        <h2><%= @meeting.research.title %></h2>
-        <%= @meeting.start_at %> - <%= @meeting.end_at %>
         <survay-video selfy="true"></survay-video>
         <ul class="nav nav-tabs">
           <li class="active"><a href="#">ノート</a></li>
@@ -11,8 +12,11 @@
         <textarea class="form-control" rows="10"></textarea>
       </div>
 
-      <div class="col-xs-9">
+      <div class="col-xs-6">
         <survay-chat-container room-token="token" meeting-id="<%= params[:meeting_id] %>"></survay-chat-container>
+      </div>
+
+      <div class="col-xs-3">
         <survay-chat-tl-container room-token="token" meeting-id="<%= params[:meeting_id] %>"></survay-chat-tl-container>
       </div>
     </div>
