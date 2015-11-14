@@ -41,6 +41,12 @@ Vue.component 'survay-chat-container',
       @$peer.on 'call', @callReceived
       @$peer.on 'connection', @connectionReceived
 
+      @$peer.on 'error', (err) =>
+        if err.type == 'disconnected'
+          @$peer.reconnect()
+        
+        console.debug(err.type, err)
+
     memberJoined: (data) ->
       if @$peer.id == data.peer_id
         console.debug 'joinSuccess', data
