@@ -1,3 +1,53 @@
 // Place all the styles related to the rooms controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+html,
+body{
+  height: 100%;
+}
+
+div.container{
+  height: 90%;
+}
+
+div.all{
+  height: 100%;
+}
+
+
+div.self{
+  color: white;
+  background-color: #444;
+  height: 100%;
+  display: table;
+}
+
+div.upper{
+  display: table-row;
+}
+
+div.remain{
+  display: table-row;
+  height: 100%;
+}
+
+ul.self-nav{
+  margin-top: 20px;
+  margin-bottom: 10px;
+  border-bottom: 8px solid rgb(0, 94, 175);
+}
+
+.nav-tabs > li.active > a{
+  color: white;
+  background-color: rgb(0, 94, 175);
+  border: none;
+}
+
+div.remain textarea{
+  height: 100%;
+}
+
+div.othets{
+  height: 100%;
+}
