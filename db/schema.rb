@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20151207095717) do
   create_table "profiles", force: :cascade do |t|
     t.integer  "user_id"
     t.integer  "sex"
-    t.datetime "birthday"
+    t.date     "birthday"
     t.integer  "age"
     t.integer  "prefecture"
     t.integer  "job"
