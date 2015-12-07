@@ -6,4 +6,5 @@ class User < ActiveRecord::Base
   has_many :participants
   has_many :meetings, through: :participants
   has_many :notes
+  has_one :profile
 end
