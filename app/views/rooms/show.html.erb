@@ -1,23 +1,23 @@
 <survay-use-media>
   <div class="container">
-    <h2><%= @meeting.research.title %></h2>
-    <p><%= @meeting.start_at %> - <%= @meeting.end_at %></p>
-
-    <div class="row">
-      <div class="col-xs-3">
-        <survay-video selfy="true"></survay-video>
-        <ul class="nav nav-tabs" style="margin-top: 20px">
-          <li class="active"><a href="#">ノート</a></li>
-        </ul>
-        <textarea class="form-control" rows="10"></textarea>
+    <div class="row all">
+      <div class="col-xs-3 self">
+        <div class="upper">
+          <h3 class="meeting"><%= @meeting.research.title %></h3>
+          <p><%= @meeting.start_at %> - <%= @meeting.end_at %></p>
+          <survay-video selfy="true"></survay-video>
+          <ul class="nav nav-tabs self-nav">
+            <li class="active"><a href="#">ノート</a></li>
+          </ul>
+        </div>
+        <div class="remain">
+          <textarea class="form-control" rows="10" style="height: 100%;"></textarea>
+        </div>
       </div>
 
-      <div class="col-xs-6">
-        <survay-chat-container room-token="token" meeting-id="<%= params[:meeting_id] %>"></survay-chat-container>
-      </div>
-
-      <div class="col-xs-3">
-        <survay-chat-tl-container room-token="token" meeting-id="<%= params[:meeting_id] %>"></survay-chat-tl-container>
+      <div class="col-xs-9 others">
+          <survay-chat-container room-token="token" meeting-id="<%= params[:meeting_id] %>"></survay-chat-container>
+          <survay-chat-tl-container room-token="token" meeting-id="<%= params[:meeting_id] %>"></survay-chat-tl-container>
       </div>
     </div>
   </div>
