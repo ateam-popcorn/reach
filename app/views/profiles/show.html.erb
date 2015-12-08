@@ -1,19 +1,34 @@
 <div class="container">
-  <%= form_for @profile, url: profile_path, class: 'form' do |f| %>
+  <%= form_for @profile, url: profile_path, class: 'form-horizontal' do |f| %>
     <div class="form-group">
-      <%= f.label :sex %>
+      <%= f.label :sex, class: 'col-xs-2 control-label' %>
+      <div class="col-xs-10">
+        <%= f.select :sex, Profile.sexes, {prompt: '性別を選択してください'}, class: 'form-control' %>
+      </div>
     </div>
     <div class="form-group">
-      <%= f.label :birthday %>
+      <%= f.label :birthday, class: 'col-xs-2 control-label' %>
+      <div class="col-xs-10">
+        <%= f.date_select :birthday, {}, class: 'form-control' %>
+      </div>
     </div>
     <div class="form-group">
-      <%= f.label :age %>
+      <%= f.label :age, class: 'col-xs-2 control-label' %>
+      <div class="col-xs-10">
+        <%= f.text_field :age, type: :number, class: 'form-control', min: 1 %>
+      </div>
     </div>
     <div class="form-group">
-      <%= f.label :prefecture %>
+      <%= f.label :prefecture, class: 'col-xs-2 control-label' %>
+      <div class="col-xs-10">
+        <%= f.select :sex, Profile.prefectures, {prompt: 'お住まいの都道府県を選択してください'}, class: 'form-control' %>
+      </div>
     </div>
     <div class="form-group">
-      <%= f.label :job %>
+      <%= f.label :job, class: 'col-xs-2 control-label' %>
+      <div class="col-xs-10">
+        <%= f.select :sex, Profile.jobs, {prompt: '業種を選択してください'}, class: 'form-control' %>
+      </div>
     </div>
   <% end %>
 </div>
