@@ -1,0 +1,19 @@
+<div class="container">
+  <%= form_for @profile, url: profile_path, class: 'form' do |f| %>
+    <div class="form-group">
+      <%= f.label :sex %>
+    </div>
+    <div class="form-group">
+      <%= f.label :birthday %>
+    </div>
+    <div class="form-group">
+      <%= f.label :age %>
+    </div>
+    <div class="form-group">
+      <%= f.label :prefecture %>
+    </div>
+    <div class="form-group">
+      <%= f.label :job %>
+    </div>
+  <% end %>
+</div>
