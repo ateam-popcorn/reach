@@ -1,4 +1,16 @@
 ja:
+  activerecord:
+    models:
+      profile: プロフィール
+
+    attributes:
+      profile:
+        sex: 性別
+        birthday: 誕生日
+        age: 年齢
+        prefecture: 都道府県
+        job: 職業
+        
   enums:
     profile:
       sex:
