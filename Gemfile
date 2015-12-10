@@ -31,6 +31,12 @@ gem 'less-rails'
 gem 'twitter-bootstrap-rails'
 gem 'websocket-rails'
 
+# form
+gem 'simple_form'
+
+# enum
+gem 'enum_help'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
