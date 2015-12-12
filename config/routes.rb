@@ -20,6 +20,8 @@ Rails.application.routes.draw do
 
   resource :profile, only: [:edit, :show, :update]
 
+  resource :question
+
   devise_for :users
   get 'home/index'
   get 'home/show'
