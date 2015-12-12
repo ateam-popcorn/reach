@@ -5,4 +5,5 @@ RSpec.describe Research, type: :model do
 
   it { is_expected.to respond_to(:meetings) }
   it { is_expected.to respond_to(:questions) }
+  it { is_expected.to respond_to(:candidates) }
 end
