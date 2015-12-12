@@ -22,6 +22,8 @@ Rails.application.routes.draw do
 
   resource :question
 
+  resource :candidate, only: [:create]
+
   devise_for :users
   get 'home/index'
   get 'home/show'
