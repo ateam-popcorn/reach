@@ -16,6 +16,7 @@ Rails.application.routes.draw do
         end
       end
     end
+    resource :candidate, only: [:create]
   end
 
   resource :profile, only: [:edit, :show, :update]
