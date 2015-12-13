@@ -1,0 +1,34 @@
+<div class="container">
+  <h1>新規フィルタ作成</h1>
+
+  <div class="form-horizontal" role="form">
+    <%= form_for @question, url: research_question_path do |f| %>
+
+      <div class="form-group">
+        <%= f.label :text, class: 'col-sm-3 control-label' %>
+        <div class="col-sm-7">
+          <%= f.text_field :text, size: '100px', class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :pass_answer, class: 'col-sm-3 control-label' %>
+        <div class="col-sm-3">
+          <%= f.label 'YES', class: 'control-label' %>
+          <%= f.radio_button :pass_answer, '0', class: 'form-control' %>
+        </div>
+        <div class="col-sm-3">
+          <%= f.label 'NO', class: 'control-label' %>
+          <%= f.radio_button :pass_answer, '1', class: 'form-control' %>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <div class="actions">
+          <%= f.submit "新規作成" %>
+        </div>
+      </div>
+
+    <% end %>
+  </div>
+</div>

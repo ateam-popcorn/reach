@@ -126,34 +126,16 @@
   <% elsif current_user.role == "company" %>
     <div class="panel panel-default">
       <div class="panel-heading">
-        <h3>予約履歴</h3>
+        <h3>作成した調査一覧</h3>
       </div>
       <div class="panel-body">
         <table class="table">
           <tbody>
             <% @researches.each do |research| %>
-              <% research.meetings.each_with_index do |meeting, i| %>
-                <tr>
-                  <td><%= i + 1 %></td>
-                  <td><%= meeting.start_at %></td>
-                  <td><%= research.title%></td>
-                  <td>
-                    <% participant = meeting.participants.find_by(user: current_user) %>
-                    <% if participant %>
-                      <%= link_to 'キャンセル',
-                        participant_path(participant),
-                        method: 'delete',
-                        class: 'btn btn-danger' %>
-                      <%= link_to "入室", meeting_room_path(meeting.id), class: "btn btn-primary" %>
-                    <% else %>
-                      <%= link_to '予約',
-                        meeting_participants_path(meeting),
-                        method: 'post',
-                        class: 'btn btn-primary' %>
-                    <% end %>
-                  </td>
-                </tr>
-              <% end %>
+              <tr>
+                <td><%= research.start_at %></td>
+                <td><%= link_to research.title, research_path(research.id)  %></td>
+              </tr>
             <% end %>
           </tbody>
         </table>
