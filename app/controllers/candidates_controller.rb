@@ -5,10 +5,6 @@ class CandidatesController < ApplicationController
   end
 
   def create
-    
-  end
-
-  def check
     redirect_to researches_path
   end
 
