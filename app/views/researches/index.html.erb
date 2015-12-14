@@ -111,9 +111,9 @@
                   </div>
                   <div class="panel-body">
                     <p><%= meeting.id %>, <%= meeting.start_at %></p>
-                    <%= link_to '予約',
-                      meeting_participants_path(meeting),
-                      method: 'post',
+                    <%= link_to '事前調査へ',
+                      new_research_candidate_path(meeting.research),
+                      method: 'get',
                       class: 'btn btn-primary' %>
                 </div>
                 </div>

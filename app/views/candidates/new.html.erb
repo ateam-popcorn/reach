@@ -1,0 +1,12 @@
+<div class="container">
+  <h1>事前調査</h1>
+  <h3>質問：<%= @question.text %> </h3>
+
+  <form method="post" action="/researches/7/candidate/check">
+    <label>回答：</label>
+    <label><input type="radio" name="answer" value="0">YES</label>
+    <label><input type="radio" name="answer" value="1">NO</label><br>
+    <input type="submit" value="送信">
+  </form>
+
+</div>

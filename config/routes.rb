@@ -16,7 +16,9 @@ Rails.application.routes.draw do
         end
       end
     end
-    resource :candidate, only: [:create]
+    resource :candidate, only: [:create, :new] do
+      post :check
+    end
     resource :question
   end
 
