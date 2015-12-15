@@ -1,7 +1,5 @@
 <script id="survay-chat-container" type="x-template">
-  <div v-for="(_, c) in userConnections" class="row all-video">
-    <div class="col-xs-4">
-      <survay-video :src="c.streamUrl" :caption="c.data.profile.username"></survay-video>
-    </div>
+  <div v-for="(_, c) in userConnections" class="all-video">
+    <survay-video :src="c.streamUrl" :caption="c.data.profile.username"></survay-video>
   </div>
 </script>
