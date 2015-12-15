@@ -6,7 +6,7 @@ class CommentsController < ApplicationController
   def create
     WebsocketRails[channel].trigger(
       :comment_received,
-      comment: params[:comment], user: current_user
+      comment: params[:comment], user: current_user, profile: current_user.profile
     )
 
     head :ok

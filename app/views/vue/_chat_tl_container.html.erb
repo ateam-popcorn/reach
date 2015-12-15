@@ -1,7 +1,7 @@
 <script id="survay-chat-tl-container" type="x-template">
-  <div class="comments">
+  <div class="comments" style="clear: both; padding-top: 32px">
     <div v-for="c in comments" class="comment" style="margin-bottom: 5px">
-      <strong>{{ c.user.email }}</strong><br>
+      <strong>{{ c.profile.username }}</strong><br>
       {{ c.comment }}
       <hr>
     </div>
