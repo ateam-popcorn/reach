@@ -7,4 +7,5 @@ RSpec.describe User, type: :model do
   it { is_expected.to respond_to(:participants) }
   it { is_expected.to respond_to(:notes) }
   it { is_expected.to respond_to(:profile) }
+  it { is_expected.to respond_to(:candidates) }
 end

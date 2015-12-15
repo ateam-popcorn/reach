@@ -16,9 +16,11 @@ Rails.application.routes.draw do
         end
       end
     end
+    resource :candidate, only: [:create]
+    resource :question
   end
 
-  resource :profile, only: [:edit, :show, :update]
+  resource :profile, only: [:new, :edit, :show, :update, :create]
 
   devise_for :users
   get 'home/index'
