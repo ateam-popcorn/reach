@@ -25,7 +25,7 @@
                 <% @researches.each do |research|%>
                   <% research.meetings.each do |meeting| %>
                     <% participant = meeting.participants.find_by(user: current_user) %>
-                    <% if participant %>   
+                    <% if participant %>
                       <tr>
                         <td><%= meeting.id %></td>
                         <td><%= meeting.start_at  %></td>
@@ -112,22 +112,19 @@
                   <div class="panel-body">
                     <p><%= meeting.id %>, <%= meeting.start_at %></p>
 
-                    
-                    <% @candidates.each do |candidate| %>  
-                      <% if meeting.research.id == candidate.research_id %>
-                        <% if current_user.id == candidate.user_id && candidate.status == 0 %>
-                          <%= link_to '予約',
-                            meeting_participants_path(meeting),
-                            method: 'post',
-                            class: 'btn btn-primary' %>
-                        <% elsif  current_user.id == candidate.user_id && candidate.status == 1%>
-                        <% else %>
-                          <%= link_to '事前調査へ',
-                            new_research_candidate_path(meeting.research),
-                            method: 'get',
-                            class: 'btn btn-primary' %>
-                        <% end %>
+                    <% candidate = meeting.candidates.find_by(user: current_user) %>
+                    <% if candidate # パス %>
+                      <% if candidate.status == 0 %>
+                        <%= link_to '予約',
+                          meeting_participants_path(meeting),
+                          method: 'post',
+                          class: 'btn btn-primary' %>
                       <% end %>
+                    <% else %>
+                      <%= link_to '事前調査へ',
+                        new_research_candidate_path(meeting.research),
+                        method: 'get',
+                        class: 'btn btn-primary' %>
                     <% end %>
                   </div>
                 </div>
