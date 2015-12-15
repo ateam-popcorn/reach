@@ -1,0 +1,16 @@
+<div class="container">
+  <h1>事前調査</h1>
+
+  <%= form_for @research, url: research_candidate_path, html: {method: 'post'} do |f| %>
+    <%= f.fields_for :questions do |qf| %>
+      <h3><%= qf.object.text %></h3>
+      <h4><%= label_tag(:answer, '回答') %></h4>
+      <%= label_tag('YES') %>
+      <%= qf.radio_button :answer, 0 %>
+      <%= label_tag('NO') %>
+      <%= qf.radio_button :answer, 1 %><br>
+    <% end %>
+    <%= f.submit "送信" %>
+  <% end %>
+
+</div>

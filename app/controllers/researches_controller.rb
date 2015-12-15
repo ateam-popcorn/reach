@@ -10,7 +10,7 @@ class ResearchesController < ApplicationController
       end
     end
     @meetings = @meetings.sort_by{|val| val['start_at']}
-
+    @candidates = Candidate.all
   end
 
   def show
