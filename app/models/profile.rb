@@ -1,5 +1,6 @@
 class Profile < ActiveRecord::Base
   belongs_to :user
+  validates :username, presence: true, length: { maximum: 32 }
   before_save :set_age_from_birthday
 
   enum sex: [:male, :female]

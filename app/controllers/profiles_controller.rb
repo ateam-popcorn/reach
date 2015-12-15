@@ -37,7 +37,7 @@ class ProfilesController < ApplicationController
   private
 
   def profile_params
-    params.require(:profile).permit(:sex, :birthday, :prefecture, :job)
+    params.require(:profile).permit(:username, :sex, :birthday, :prefecture, :job)
   end
 
   def set_profile
