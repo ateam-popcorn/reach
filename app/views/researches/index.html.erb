@@ -112,7 +112,7 @@
                   <div class="panel-body">
                     <p><%= meeting.id %>, <%= meeting.start_at %></p>
 
-                    <% candidate = meeting.candidates.find_by(user: current_user) %>
+                    <% candidate = meeting.research.candidates.find_by(user: current_user) %>
                     <% if candidate # パス %>
                       <% if candidate.status == 0 %>
                         <%= link_to '予約',
