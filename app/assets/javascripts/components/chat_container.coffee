@@ -71,13 +71,13 @@ Vue.component 'survay-chat-container',
           peer_id: @$peer.id
           user: @user
 
-        @addConnection(data.user, data.peer_id, null)
+        @addConnection(data, null)
 
     welcomeReceived: (data) ->
       return if @$peer.id == data.peer_id
       console.debug 'welcomeReceived', data
 
-      @addConnection(data.user, data.peer_id, null)
+      @addConnection(data, null)
       call = @$peer.call(data.peer_id, @$localStream)
       @waitStream(call)
 
@@ -102,21 +102,21 @@ Vue.component 'survay-chat-container',
           console.debug 'dataReceived', conn.label, data
           @userConnections[conn.label].volume = data.volume
 
-    addConnection: (user, peer, streamUrl) ->
+    addConnection: (data, streamUrl) ->
       newConn =
-        user: user
-        peer: peer
+        data: data
+        peer: data.peer_id
         streamUrl: streamUrl
         volume: 0
 
-      oldConn = @userConnections[user.email]
+      oldConn = @userConnections[data.user.email]
       # if oldConn
       #   console.debug 'Close old connection'
       #   @$connections[oldConn.peer].close()
       #   @peerConnections[oldConn.peer] = null
 
-      Vue.set @userConnections, user.email, newConn
-      Vue.set @peerConnections, peer, newConn
+      Vue.set @userConnections, data.user.email, newConn
+      Vue.set @peerConnections, data.peer_id, newConn
 
     setStream: (peer, streamUrl) ->
       c = @peerConnections[peer]
