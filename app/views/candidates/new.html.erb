@@ -1,13 +1,15 @@
 <div class="container">
   <h1>事前調査</h1>
-  <h3>質問：<%= @question.text %> </h3>
 
-  <%= form_tag('/researches/:research_id/candidate', method: 'post') do %>
-    <h4><%= label_tag(:answer, '回答') %></h4>
-    <%= label_tag('YES') %>
-    <%= radio_button_tag(:answer, 0) %>
-    <%= label_tag('NO') %>
-    <%= radio_button_tag(:answer, 1) %><br>
+  <%= form_for @research, url: research_candidate_path do |f| %>
+    <%= f.fields_for :questions do |qf| %>
+      <h3><%= qf.object.text %></h3>
+      <h4><%= label_tag(:answer, '回答') %></h4>
+      <%= label_tag('YES') %>
+      <%= radio_button_tag(:answer, 0) %>
+      <%= label_tag('NO') %>
+      <%= radio_button_tag(:answer, 1) %><br>
+    <% end %>
     <%= submit_tag("送信") %>
   <% end %>
 
