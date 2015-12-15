@@ -1,0 +1,8 @@
+<%= simple_form_for @profile, url: profile_path, wrapper: :vertical_input_group do |f| %>
+  <%= f.error_notification %>
+  <%= f.input :sex %>
+  <%= f.input :birthday, start_year: 1900 %>
+  <%= f.input :prefecture %>
+  <%= f.input :job %>
+  <%= f.submit class: 'btn btn-primary' %>
+<% end %>
