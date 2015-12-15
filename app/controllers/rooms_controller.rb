@@ -9,7 +9,7 @@ class RoomsController < ApplicationController
   def join
     WebsocketRails[channel].trigger(
       :member_joined,
-      peer_id: params[:peer_id], user: current_user
+      peer_id: params[:peer_id], user: current_user, profile: current_user.profile
     )
 
     head :ok
@@ -21,7 +21,7 @@ class RoomsController < ApplicationController
   def welcome
     WebsocketRails[channel].trigger(
       :welcome_received,
-      peer_id: params[:peer_id], user: current_user
+      peer_id: params[:peer_id], user: current_user, profile: current_user.profile
     )
 
     head :ok
