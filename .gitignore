@@ -11,3 +11,7 @@
 /log/*
 !/log/.keep
 /tmp
+
+# OS X's ugly files
+*.DS_Store
+
